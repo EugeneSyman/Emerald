@@ -1,0 +1,4 @@
+{
+  "ConnectingStringDB": "Host=172.16.193.234;Port=5432;Database=postgres;Username=postgres;Password=postgres",
+  "ConnectingStringGeoserver": "http://nuolh.belstu.by:4201/geoserver/"
+}

@@ -1,0 +1,505 @@
+﻿@using EMERALD.Models
+@using EMERALD.Controllers
+@model EMERALD.Models.ViewModel
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>    
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Information about the Cutting Area</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+    <style>
+        body {
+            display: inline-block;
+            min-width: 100%;
+        }
+        ul {
+            background-color: currentcolor;
+        }
+        .id-pp {
+            float: right;
+            padding-right: 10px;
+        }
+
+        .table-info {
+            min-width: 90%;
+            padding-left: 5%;
+            padding-right: 5%;
+        }
+
+        .nav {
+            padding-left: 1px;
+        }
+
+        .nav-link {
+            display: block;
+            padding: .5rem 1rem;
+            color: #0d6efd;
+            text-decoration: none;
+            transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out;
+        }
+
+        .nav-tabs {
+            border-bottom: 4px solid #2270bf;
+        }
+
+        .tabs {
+        }
+
+        .table tbody tr:last-child td {
+            border-bottom: 1px solid #ddd;
+        }
+
+        .inf-form {
+            width: 71%;
+            padding: 2% 10px 10px 10px;
+        }
+
+        .input-group-text {
+            color: white;
+            background: #0d6efd;
+        }
+    </style>
+</head>
+<body>
+    <ul class="nav nav-tabs tabs" id="myTab" role="tablist">
+        <li class="nav-item" role="presentation" style="padding-left: 5%;">
+            <button class="nav-link" id="info-tab" data-bs-toggle="tab" data-bs-target="#info" type="button" role="tab" aria-controls="info" aria-selected="false">Информация</button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="recounts-tab" data-bs-toggle="tab" data-bs-target="#recount" type="button" role="tab" aria-controls="recount" aria-selected="false">Перечёт</button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="height-tab" data-bs-toggle="tab" data-bs-target="#height" type="button" role="tab" aria-controls="height" aria-selected="false">Высоты</button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="podrostok-tab" data-bs-toggle="tab" data-bs-target="#podrostok" type="button" role="tab" aria-controls="podrostok" aria-selected="false">Подрост</button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="podlesok-tab" data-bs-toggle="tab" data-bs-target="#podlesok" type="button" role="tab" aria-controls="podlesok" aria-selected="false">Подлесок</button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="jnps-tab" data-bs-toggle="tab" data-bs-target="#jnps" type="button" role="tab" aria-controls="jnps" aria-selected="false">Живой напочвенный покров</button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link active" id="geos-tab" data-bs-toggle="tab" data-bs-target="#geos" type="button" role="tab" aria-controls="geos" aria-selected="true">Геоинформация</button>
+        </li>
+        <li class="nav-item" role="presentation" style="padding-left: 17.5%;">
+            <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">№ @ViewBag.ID</a>
+        </li>
+    </ul>
+    <div class="tab-content table-info" id="myTabContent">
+        <div class="tab-pane fade show active" id="geos" role="tabpanel" aria-labelledby="geos-tab">
+            <table class="table table-hover">
+                <thead class="table-dark">
+                    <tr>
+                        <th scope="col">Точка №</th>
+                        <th scope="col">Азимут</th>
+                        <th scope="col"> X </th>
+                        <th scope="col"> Y </th>
+                        <th scope="col">Дирекционный угол</th>
+                        <th scope="col">Горизонтальное проложение</th>
+                        <th scope="col">Румб</th>
+                        <th scope="col">L</th>
+                        <th scope="col">Вертикальный угол</th>
+                        <th scope="col">Лесосека</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.geos)
+                    {
+                        <tr class="table-light">
+                            <th scope="row">@item.position_point</th>
+                            <td>@item.azimuth</td>
+                            <td>@item.coordinate_x</td>
+                            <td>@item.coordinate_y</td>
+                            <td>@item.direction_angle</td>
+                            <td>@item.horizontal_distance</td>
+                            <td>@item.rhumb</td>
+                            <td>@item.slant_distance</td>
+                            <td>@item.vertical_angle</td>
+                            <td>@item.is_binding_line</td>
+                        </tr>
+                    }
+                    <tr class="table-dark">
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="tab-pane fade" id="height" role="tabpanel" aria-labelledby="height-tab">
+            <table class="table">
+                <tbody>
+                    @foreach (var group in Model.heightsGroups)
+                    {
+                        <tr>
+                            <th class="table-dark" style="color: greenyellow;" scope="col" colspan="7">Порода: @Model.getBreedById(group.First().breed)</th>
+                        </tr>
+                        var nestedGroup = group.GroupBy(p => p.tier);
+                        foreach (var itemNested in nestedGroup)
+                        {
+                            <tr>
+                                <th style="background-color:#91d6d6;padding-left: 17px;" colspan="7">@itemNested.FirstOrDefault().tier Ярус</th>
+                            </tr>
+
+                            <tr class="nested">
+                                <td colspan="7">
+                                    <table class="table mb-0 table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">Поколение</th>
+                                                <th scope="col"></th>
+                                                <th scope="col">Диаметр</th>
+                                                <th scope="col">Высота</th>
+                                                <th scope="col">Высота на уровне глаз</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach (var item in itemNested)
+                                            {
+                                                <tr>
+                                                    <td>@item.generation</td>
+                                                    <th scope="col"></th>
+                                                    <td>@item.diameter</td>
+                                                    <td>@item.height</td>
+                                                    <td>@item.initial_height</td>
+                                                </tr>
+                                            }
+
+                                        </tbody>
+                                        <tfoot class="table-light">
+                                            <tr>
+                                                <th scope="col">Разряд Высот:  <i>@ViewModel.getRankHeights(double.Parse(Model.getAvgDiameter(itemNested)), double.Parse(Model.getAvgHeight(itemNested)), group.First().breed)</i></th>
+                                                <th scope="col"></th>
+                                                <th scope="col">@Model.getAvgDiameter(itemNested)</th>
+                                                <th scope="col">@Model.getAvgHeight(itemNested)</th>
+                                                <th scope="col">@Model.getAvgInitialHeight(itemNested)</th>
+                                            </tr>
+                                        </tfoot>
+                                    </table>
+                                </td>
+                            </tr>
+                        }
+                    }
+
+                    <tr class="table-dark">
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+
+                </tbody>
+            </table>
+
+        </div>
+        <div class="tab-pane fade" id="info" role="tabpanel" aria-labelledby="info-tab">
+            <div class="inf-form border border-5">
+                @foreach (var item in Model.infos)
+                {
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" id="basic-addon3">Лесхоз</span>
+                        <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3" value="@Model.getLeshozById(item.code_lesxoz)">
+                    </div>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" id="basic-addon3">ПЛХО</span>
+                        <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3" value="@Model.getPlhoById(item.code_plxo)">
+                    </div>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" id="basic-addon3">Лесничество</span>
+                        <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3" value="@Model.getForestryById(item.code_lesxoz, item.code_lestichestva)">
+                    </div>
+
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" id="basic-addon3">Выдел</span>
+                        <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3" value="@item.number_vided">
+                    </div>
+
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" id="basic-addon3">Квартал</span>
+                        <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3" value="@item.number_kvartala">
+                    </div>
+
+
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" id="basic-addon3">Область</span>
+                        <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3" value="@Model.getRegionById(item.number_region)">
+                    </div>
+
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" id="basic-addon3">Лесосека №</span>
+                        <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3" value="@item.number_lesoseka">
+                    </div>
+                }
+            </div>
+        </div>
+        <div class="tab-pane fade" id="jnps" role="tabpanel" aria-labelledby="jnps-tab">
+            <table class="table table-hover">
+                <thead class="table-dark">
+                    <tr>
+                        <th scope="col">Вид №1</th>
+                        <th scope="col">Вид №2</th>
+                        <th scope="col">Вид №3</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.jnps)
+                    {
+                        <tr class="table-light">
+                            <td>@Model.getGroundCoverKindsById(item.groundcover_kind_1.Value)</td>
+                            <td>@Model.getGroundCoverKindsById(item.groundcover_kind_2.Value)</td>
+                            <td>@Model.getGroundCoverKindsById(item.groundcover_kind_3.Value)</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        <div class="tab-pane fade" id="podlesok" role="tabpanel" aria-labelledby="podlesok-tab">
+            <table class="table table-hover">
+                <thead class="table-dark">
+                    <tr>
+                        <th scope="col">Порода</th>
+                        <th scope="col">Количество</th>
+                        <th scope="col">Н</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.podlesoks)
+                    {
+                        <tr class="table-light">
+                            <td>@Model.getBreedById(item.breed)</td>
+                            <td>@item.treeCount</td>
+                            <td>@item.treeMiddleHeight</td>
+                        </tr>
+                    }
+                </tbody>
+                <tfoot class="table-light">
+                    <tr>
+                        <th scope="col">Итого: </th>
+                        <th scope="col">@Model.getSumTreesCount(Model.podlesoks)</th>
+                        <th scope="col">@Model.getAvgHeight(Model.podlesoks)</th>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+
+        <div class="tab-pane fade" id="podrostok" role="tabpanel" aria-labelledby="podrostok-tab">
+            <table class="table table-hover">
+                <tbody>
+                    @foreach (var group in Model.podrostoksGroup)
+                    {
+
+                        <tr>
+                            <th class="table-dark" style="color: greenyellow;" scope="col" colspan="7">Порода: @Model.getBreedById(group.First().breed)</th>
+                        </tr>
+
+                        <tr class="table-dark">
+                            <th scope="col">Здоровых</th>
+                            <th scope="col">Повреждённых</th>
+                            <th scope="col">Сухих</th>
+                            <th scope="col">Возраст</th>
+                        </tr>
+
+
+                        var nestedGroup = group.GroupBy(p => p.heightCategory);
+                        foreach (var itemNested in nestedGroup)
+                        {
+                            if (@itemNested.FirstOrDefault().heightCategory != 3)
+                            {
+
+                                <tr>
+                                    <th style="background-color: #91d6d659; padding-left: 17px;" colspan="7">
+                                        @{
+                                            var strCategory = "";
+                                            switch (@itemNested.FirstOrDefault().heightCategory)
+                                            {
+                                                case 0:
+                                                    strCategory = "До 0,6 м";
+                                                    break;
+                                                case 1:
+                                                    strCategory = "0,6-1,5 м";
+                                                    break;
+                                                case 2:
+                                                    strCategory = "Больше 1,5 м";
+                                                    break;
+                                                default:
+                                                    break;
+                                            }
+                                        }
+                                        @strCategory
+                                    </th>
+                                </tr>
+
+                                <tr class="nested">
+                                    <td colspan="8">
+                                        <table class="table mb-0">
+                                            <thead class="table-dark" style="visibility:collapse">
+                                                <tr>
+                                                    <th scope="col">Здоровых</th>
+                                                    <th scope="col">Повреждённых</th>
+                                                    <th scope="col">Сухих</th>
+                                                    <th scope="col">Возраст</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach (var item in itemNested)
+                                                {
+                                                    <tr class="table-light">
+                                                        <td>@item.goodTreeCount</td>
+                                                        <td>@item.badTreeCount</td>
+                                                        <td>@item.dryTreeCount</td>
+                                                        <td>@item.age</td>
+                                                    </tr>
+                                                }
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                </tr>
+                            }
+                        }
+
+                <tr>
+                    <th scope="col" style="background: #7fffd4a8;" colspan="7">Итого: </th>
+                </tr>
+
+                        <tr>
+                            <th scope="col">@Model.getSumGoodTree(group)</th>
+                            <th scope="col">@Model.getSumBadTree(group)</th>
+                            <th scope="col">@Model.getSumDryTree(group)</th>
+                            <th scope="col">@Model.getAvgAge(group)</th>
+                        </tr>
+                    }
+                </tbody>
+                </table>
+        </div>
+
+        <div class="tab-pane fade" id="recount" role="tabpanel" aria-labelledby="recount-tab">
+
+            <table class="table table-hover">
+                <tbody>
+                    @foreach (var group in Model.recountsGroup)
+                    {
+                        <tr>
+                            <th class="table-dark" style="color: greenyellow;" scope="col" colspan="7">Порода: @Model.getBreedById(group.First().nameporod_tier)</th>
+                        </tr>
+                        var nestedGroup = group.GroupBy(p => p.tier);
+                        foreach (var itemNested in nestedGroup)
+                        {
+
+                                var summ = 0;
+                                var summNested = 0;
+                            <tr>
+                                <th style="background-color:#91d6d6;padding-left: 17px;" colspan="7">@itemNested.FirstOrDefault().tier Ярус</th>
+                            </tr>
+
+                            <tr class="nested">
+                                <td colspan="7">
+                                    <table class="table mb-0 table-hover">
+                                        <thead class="table-dark">
+                                            <tr>
+                                                <th scope="col">Ступень толщины</th>
+                                                <th scope="col">Дровяных</th>
+                                                <th scope="col">Деловых</th>
+                                                <th scope="col" style="color: #00ffad;">Итого</th>
+                                                <th scope="col">Сухостойных</th>
+                                                <th scope="col">Оставляемых</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach (var item in itemNested)
+                                            {
+                                            <tr class="table-light">
+                                                <td>@item.step</td>
+                                                <td>@item.count_drov</td>
+                                                <td>@item.count_del</td>
+                                                <td scope="col" style="font-weight: bold;">
+                                                    @{
+                                                        summNested = (item.count_del + item.count_drov);
+                                                    }
+                                                    @summNested
+                                                </td>
+                                                @{
+                                                    summ += summNested;
+                                                }
+                                                <td>@item.count_syx</td>
+                                                <td>@item.count_trees_not_felling</td>
+                                            </tr>
+                                            }
+                                        </tbody>
+                                        <tfoot class="table-light">
+                                            <tr>
+                                                <th scope="col"></th>
+                                                <th scope="col">@Model.getSumDrov(itemNested)</th>
+                                                <th scope="col">@Model.getSumDel(itemNested)</th>
+                                                <th scope="col">@summ</th>
+                                                <th scope="col">@Model.getSumSyx(itemNested)</th>
+                                                <th scope="col">@Model.getSumTrees(itemNested)</th>
+                                            </tr>
+                                        </tfoot>
+                                    </table>
+                                </td>
+                            </tr>
+                        }
+                    }
+
+                    <tr class="table-dark">
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+
+    <script type="text/javascript">
+            //const nestedTable = document.querySelectorAll('.switch-layer');
+            //for (let item of SwitchesLayers) {
+            //    item.switchButton();
+            //    item.switchButton('off');
+
+            //    item.onchange = function () {
+            //        let LayerSwitcherValue = this.value;
+
+            //        map.getLayers().forEach(function (element, index, array) {
+            //            if (element.ol_uid === LayerSwitcherValue) {
+            //                var styleLayer = styleСatalog.get(element.ol_uid);
+            //                if (styleLayer.stylуСomponent !== null) {
+            //                    if (styleLayer.activeStyles !== null) {
+            //                        styleLayer.activeStyles.setVisible(item.checked);
+            //                    }
+            //                }
+            //                element.setVisible(item.checked);
+            //            }
+            //        })
+            //    }
+            //}
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
+</body>
+</html>

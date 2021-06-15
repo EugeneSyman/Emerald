@@ -1,0 +1,499 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - EMERALD</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap-switch-button@1.1.0/css/bootstrap-switch-button.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css">
+    <link href="~/lib/fancybox/jquery.fancybox.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="~/css/maps.css" />
+    <link rel="stylesheet" href="~/css/style5.css">
+
+    <style type="text/css">
+        a.clip {
+            box-shadow: rgb(0 0 0 / 20%) 0px 3px 5px inset;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            box-shadow: darkgray;
+            margin: 3px;
+        }
+
+        .btn.active, .btn:active {
+            background-image: none;
+            outline-color: initial;
+            box-shadow: rgb(0 0 0 / 70%) 0px 3px 5px inset;
+        }
+
+        .switch.ios, .switch-on.ios, .switch-off.ios {
+            border-radius: 20rem;
+            margin: 0px;
+            font-size: 14px !important;
+        }
+
+        .switch.ios .switch-handle {
+            border-radius: 20rem;
+        }
+
+        .thumb img {
+            -webkit-filter: grayscale(0);
+            filter: none;
+            border-radius: 5px;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            padding: 5px;
+        }
+
+        .thumb img:hover {
+                -webkit-filter: grayscale(1);
+                filter: grayscale(1);
+            }
+
+        .thumb {
+            padding: 5px;
+        }
+
+        .ol-tooltip {
+            position: relative;
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 4px;
+            color: white;
+            padding: 4px 8px;
+            opacity: 0.7;
+            white-space: nowrap;
+            font-size: 12px;
+        }
+
+        .ol-tooltip-measure {
+            opacity: 1;
+            font-weight: bold;
+        }
+
+        .ol-tooltip-static {
+            background-color: #ffcc33;
+            color: black;
+            border: 1px solid white;
+        }
+
+            .ol-tooltip-measure:before,
+            .ol-tooltip-static:before {
+                border-top: 6px solid rgba(0, 0, 0, 0.5);
+                border-right: 6px solid transparent;
+                border-left: 6px solid transparent;
+                content: "";
+                position: absolute;
+                bottom: -6px;
+                margin-left: -7px;
+                left: 50%;
+            }
+
+        .ol-tooltip-static:before {
+            border-top-color: #ffcc33;
+        }
+
+        .btn-rounded {
+            border-radius: 19px;
+            padding-top: 3px;
+            padding-bottom: 3px;
+            padding-left: 3px;
+        }
+
+        .btn-circle {
+            width: 28px;
+            height: 28px;
+            border-radius: 19px;
+            text-align: center;
+            padding-left: 0;
+            padding-right: 0;
+            padding-top: 1px;
+            font-size: 17px;
+            background-color: forestgreen !important;
+            margin-right: 0.5px;
+        }
+
+        .btn-circle-ellipsis {
+            width: 28px;
+            height: 28px;
+            border-radius: 19px;
+            text-align: center;
+            padding-left: 0;
+            padding-right: 0;
+            padding-top: 1px;
+            font-size: 17px;
+            background-color: forestgreen;
+            margin-right: 0.5px;
+        }
+
+        .btn-circle-ellipsis-style {
+            width: 28px;
+            height: 28px;
+            border-radius: 19px;
+            text-align: center;
+            padding-left: 0;
+            padding-right: 0;
+            padding-top: 1px;
+            font-size: 17px;
+            background-color: forestgreen;
+            margin-right: 0.5px;
+        }
+
+        .btn-group-sm > .btn, .btn-sm {
+            padding: 3px 4px 6px 4px !important;
+            font-size: 16px !important;
+        }
+
+        .btn span.glyphicon {
+            opacity: 0;
+        }
+
+        .btn.active span.glyphicon {
+            opacity: 1;
+        }
+
+        .small-modal-content {
+            max-width: 400px;
+            display: inline-table;
+            min-width: 200px;
+        }
+
+        .small-modal-place {
+            margin-left: 331px;
+            margin-top: 30vh;
+        }
+
+        .modal-footer {
+            text-align: center !important;
+        }
+
+        .btn-bundle {
+            background-color: purple;
+        }
+
+        /*///*/
+        .navbar {
+            background-image: initial;
+            background-color: rgb(24, 26, 27);
+            border-color: initial;
+            box-shadow: rgb(0 0 0 / 10%) 1px 1px 3px;
+        }
+
+        #sidebar {
+            background-image: initial;
+            background-color: rgb(37, 54, 123);
+            color: rgb(232, 230, 227);
+        }
+
+        #sidebarCollapse {
+            background-image: initial;
+            background-color: rgb(30, 32, 33);
+        }
+
+        :root {
+            --darkreader-neutral-background: #131516;
+            --darkreader-neutral-text: #d8d4cf;
+            --darkreader-selection-background: #004daa;
+            --darkreader-selection-text: #e8e6e3;
+        }
+        ::-webkit-scrollbar-thumb {
+            background-color: #454a4d;
+        }
+
+        ::-webkit-scrollbar-corner {
+            background-color: #181a1b;
+        }
+        ::-webkit-scrollbar {
+            background-color: #202324;
+            color: #aba499;
+        }
+        .list-layers::-webkit-scrollbar-track {
+            box-shadow: rgb(27 48 64 / 20%) 5px 5px 5px -5px inset;
+            background-color: rgb(26, 28, 30);
+        }
+
+        #sidebar ul li.active > a, a[aria-expanded="true"] {
+            color: rgb(232, 230, 227);
+            background-image: initial;
+            background-color: rgb(41, 54, 134);
+        }
+
+        .switch-handle {
+            background-color: rgb(24, 26, 27);
+        }
+
+        .btn-primary {
+            color: rgb(216, 212, 207);
+            border-color: rgb(43, 103, 154);
+        }
+        .switch-off {
+            border-color: initial;
+            box-shadow: none;
+        }
+
+        .ol-control {
+            background-color: rgba(24, 26, 27, 0.4) !important;
+        }
+
+        .ol-unselectable, .ol-viewport {
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .ol-tooltip-static {
+            background-color: rgb(173, 130, 0);
+            color: rgb(232, 230, 227);
+            border-color: rgb(48, 52, 54);
+        }
+
+        .btn-undo {
+            background: #047ea2;
+            color: aliceblue;
+        }
+
+        .list-layers::-webkit-scrollbar-thumb {
+            background-image: linear-gradient(rgb(0, 158, 201), rgb(0, 73, 187));
+            background-color: initial;
+        }
+
+        .modal-content {
+            color: black;
+        }
+    </style>
+
+</head>
+<body>
+    <!-- Modal Window Admin Mod -->
+    <div class="modal fade" id="adminModal" tabindex="-1" role="dialog" aria-labelledby="adminModalTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Закрыть"><span aria-hidden="true">×</span></button>
+                    <h4 class="modal-title" id="adminModalTitle">Admin mod</h4>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-group row">
+                            <label for="inputUsername" class="col-sm-2 col-form-label">Username</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="inputUsername" placeholder="Username">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="inputPassword" class="col-sm-2 col-form-label">Password</label>
+                            <div class="col-sm-10">
+                                <input type="password" class="form-control" id="inputPassword" placeholder="Password">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="loginAdmin()">Login</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Window Display Info -->
+    <div class="modal fade" id="ModalWindow" tabindex="-1" aria-labelledby="ModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Закрыть"><span aria-hidden="true">×</span></button>
+                    <h4 class="modal-title" id="ModalLabel"></h4>
+                </div>
+                <div class="modal-body">
+                    <div id="image-gallery" class="row">
+                        <div class="col-md-3 bg" style="height: 200px; margin-left: 15.8em;">
+                            <div class="loader" id="loader-5">
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="form-upload-image">
+                        <form asp-controller="Maps" asp-action="UploadFiles" method="post"
+                              enctype="multipart/form-data">
+                            <input type="file" name="files" multiple />
+                            <input type="hidden" id="hidden-field" name="_point_id" /><br />
+                            <button type="submit">Upload File</button>
+                        </form>
+                    </div>
+
+                    <form id="AttributesBox">
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-info" id="btn-info" hidden>Информация</button>
+                    <button type="button" class="btn btn-bundle" id="btn-bundle" hidden>Информация о пробной площади</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Window Choice Style -->
+    <div id="StyleModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="gridModalLabel" aria-hidden="true">
+        <div class="modal-dialog small-modal-place" role="document">
+            <div class="modal-content small-modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Закрыть"><span aria-hidden="true">×</span></button>
+                    <h4 class="modal-title" id="gridModalLabel">Стиль слоя</h4>
+                </div>
+                <div class="modal-body" id="styleCheck">
+
+                </div>
+                <div class="modal-footer">
+                    <button id="btnSetStyle" type="button" class="btn btn-primary" data-dismiss="modal">Применить</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="wrapper over">
+        <!-- Sidebar Holder -->
+        <nav id="sidebar">
+            <div class="sidebar-header">
+                <h2><a asp-area="" asp-controller="Maps" asp-action="Index">EMERALD</a></h2>
+            </div>
+
+            <ul class="list-unstyled components">
+                <li class="active">
+                    <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false"><i class="bi bi-geo-alt"></i> Слои</a>
+                    <ul class="collapse list-unstyled list-layers" id="pageSubmenu">
+                       
+                    </ul>
+                </li>
+                <li class="active">
+                    <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false"><i class="bi bi-map"></i> Карты</a>
+                    <ul class="collapse list-unstyled" id="homeSubmenu">
+                        <div class="btn-group btn-group-toggle" data-toggle="buttons" style=" width: 100%">
+                            <label class="btn btn-secondary active" style="width: 33.3%;">
+                                <input type="radio" class="selector-map" name="options" value="OSMStandard" id="map1" checked>Standart <i class="bi bi-compass-fill"></i>
+                            </label>
+                            <label class="btn btn-secondary" style="width: 33.3%;">
+                                <input type="radio" class="selector-map" name="options" value="BMSpase" id="map2">Space <i class="bi bi-moon-stars-fill"></i>
+                            </label>
+                            <label class="btn btn-secondary" style="width: 33.3%;">
+                                <input type="radio" class="selector-map" name="options" value="ARCGis" id="map3">Terrain <i class="bi bi-tree-fill"></i>
+                            </label>
+                        </div>
+                    </ul>
+                </li>
+            </ul>
+
+            <ul class="list-unstyled CTAs">
+                <li><a class="article"><div id="info">&nbsp;</div></a></li>
+            </ul>
+        </nav>
+
+        <!-- Page Content Holder -->
+        <div id="content">
+
+            <nav class="navbar navbar-default">
+                <div class="container-fluid">
+
+                    <div class="navbar-header">
+                        <button type="button" id="sidebarCollapse" class="navbar-btn">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </button>
+                    </div>
+
+                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                        <ul class="nav navbar-nav navbar-right">
+                            <li style="color: #da2929; padding-top: 0.7em;">
+                                <span data-toggle="tooltip" title="Отслеживать моё местоположение">
+                                    <input id="track" type="checkbox" data-toggle="switchbutton" data-onlabel="<i class='bi bi-geo-alt'></i>" data-offlabel="<i class='bi bi-geo-alt-fill'></i>">
+                                </span>
+                            </li>
+                            <li style="padding-top: 0.7em;">
+                                <div id="info" style="display: none;"></div>
+                            </li>
+                            <li style="color: #ddfa29; padding-top: 0.7em;">
+                                <span data-toggle="tooltip" title="Линейка">
+                                    <input id="switch-measure" type="checkbox" data-toggle="switchbutton" data-onlabel="<i class='bi bi-rulers'></i>" data-offlabel="<i class='bi bi-rulers'></i>">
+                                </span>
+                            </li>
+                            <li style="padding-top: 0.7em;">
+                                <form class="form-inline" id="measurement-type" style="padding: 0px 13px 0px 14px;" hidden>
+                                    <label for="type">Тип измерения &nbsp;</label>
+                                    <select id="type" class="form-control">
+                                        <option value="length">Длина (Линия)</option>
+                                        <option value="area">Площадь (Полигон)</option>
+                                    </select>
+                                </form>
+                            </li>
+                            <li style="color: #00ffcb8c; padding-top: 0.7em;">
+                                <span data-toggle="tooltip" title="Режим Художника">
+                                    <input id="switch-painter" type="checkbox" data-toggle="switchbutton" data-onlabel="<i class='bi bi-brush'></i>" data-offlabel="<i class='bi bi-brush-fill'></i>">
+                                </span>
+                            </li>
+                            <li style="padding-top: 0.7em; padding-left: 9px;">
+                                <form class="form-inline" id="geometry-type" style="padding: 0px 13px 0px 14px;" hidden>
+                                    <label for="geom-type">Тип геометрии &nbsp;</label>
+                                    <select id="geom-type" class="form-control">
+                                        <option value="Point">Точка</option>
+                                        <option value="LineString">Линия</option>
+                                        <option value="Polygon">Полигон</option>
+                                        <option value="Circle">Круг</option>
+                                    </select>
+                                    <input class="form-control mr-2 mb-2 mt-2 btn-undo" type="button" value="Undo" id="undo">
+                                </form>
+                            </li>
+                            <li id="adminConteiner" style="padding-top: 0.7em;padding-left: 10px;">
+                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#adminModal" style="visibility: hidden;">
+                                    Admin
+                                </button>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+
+            @RenderBody()
+
+        </div>
+    </div>
+
+
+    <script type="module" src="~/js/main.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+
+    @await RenderSectionAsync("Scripts", required: false)
+
+
+    <!-- jQuery CDN -->
+    <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+    <!-- Bootstrap Js CDN -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap-switch-button@1.1.0/dist/bootstrap-switch-button.min.js"></script>
+    <!-- fancyBox JS -->
+    <script src="~/lib/fancybox/jquery.fancybox.min.js"></script>
+    <!-- Pointer events polyfill for old browsers, see https://caniuse.com/#feat=pointer -->
+    <script src="https://unpkg.com/elm-pep"></script>
+
+    <script type="text/javascript">
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip({
+                title: 'Nameless',
+                placement: 'bottom',
+                delay: { show: 300, hide: 1000 }
+            });
+        });
+
+        $(document).ready(function () {
+            $('#sidebarCollapse').on('click', function () {
+                $('#sidebar').toggleClass('active');
+                $(this).toggleClass('active');
+            });
+        });
+    </script>
+</body>
+</html>
+
