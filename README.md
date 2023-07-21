@@ -15,11 +15,11 @@ A map appears before the user, where the tools for interacting with it are locat
 
 After clicking, a drop-down list of layers will open.
 
-<img src="pictures/pic3.png" width="259" height="267" />
+<img src="pictures/pic3.png" width="660" height="339" />
 
 On this page, the user sees preloaded layer names that can be selected for display. To select the displayed layer, it is necessary to change the position of the switch to the opposite one, after which it will automatically load.
 
-<img src="pictures/pic4.png" width="635" height="418" />
+<img src="pictures/pic4.png" width="259" height="267" />
 
 For this loaded layer, you can apply a thematic style, for which you need to select the icon located near the name of the style in the form of a brush and at the same time it must be active, which symbolizes that this layer has styles available for display. When you click on this icon, a dialog box will appear with a list of styles for this layer.
 
