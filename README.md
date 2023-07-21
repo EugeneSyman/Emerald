@@ -7,7 +7,7 @@ Geographic information system
 
 Sing In
 
-<img src="pictures/pic1.png" width="240" height="450" />
+<img src="pictures/pic1.png" width="400" height="450" />
 <img src="pictures/pic2.png" width="240" height="450" />
 
 После авторизации приложения вы перейдёте на Главную страницу. В правом нижнем углу присутствует кнопка для начала записи, при нажатии на неё индикатор сверху будет соответствовать громкости звуков, которые он записывает
