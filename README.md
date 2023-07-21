@@ -7,19 +7,19 @@ Geographic information system
 
 Sing In
 
-<img src="pictures/pic1.jpg" width="240" height="450" />
-<img src="pictures/pic2.jpg" width="240" height="450" />
+<img src="pictures/pic1.png" width="240" height="450" />
+<img src="pictures/pic2.png" width="240" height="450" />
 
 После авторизации приложения вы перейдёте на Главную страницу. В правом нижнем углу присутствует кнопка для начала записи, при нажатии на неё индикатор сверху будет соответствовать громкости звуков, которые он записывает
 
-<img src="pictures/pic3.jpg" width="240" height="450" />
-<img src="pictures/pic4.jpg" width="240" height="450" />
-<img src="pictures/pic5.jpg" width="240" height="450" />
+<img src="pictures/pic3.png" width="240" height="450" />
+<img src="pictures/pic4.png" width="240" height="450" />
+<img src="pictures/pic5.png" width="240" height="450" />
 
 Перейдя на следующую вкладку, пользователь увидит следующую форму для установки Времени и периода записи в фоновом режиме
 
-<img src="pictures/pic6.jpg" width="240" height="450" />
+<img src="pictures/pic6.png" width="240" height="450" />
 
 Работа с данной формой происходит следующим образом
 
-<img src="pictures/pic7.jpg" width="240" height="450" />
+<img src="pictures/pic7.png" width="240" height="450" />
